@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-
 class LearningController extends AbstractController
 {
 
@@ -22,9 +21,11 @@ class LearningController extends AbstractController
         $session->get('name') ?
             $response = $this->render('learning/about.html.twig', [
                 'name' => $session->get('name'),
+                'date' => new \DateTime(),
             ]) :
             $response = $this->forward('App\Controller\LearningController::changeMyName', [
                 'name' => $requestStack->getSession()->get('name'),
+                'date' => new \DateTime(),
             ]);
 
         return $response;
